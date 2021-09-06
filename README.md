@@ -1,2 +1,2 @@
-# QueryHelper
+# Query Search
 
