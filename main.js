@@ -20,5 +20,3 @@ function getKeyword() {
     .then(data=>display(data, inputKeyword))
 
 }
-
-//Figure out a way to fetch the API URL in JS. Refer to the API link to see how the JSON data looks like. 
