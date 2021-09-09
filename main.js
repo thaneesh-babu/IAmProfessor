@@ -20,3 +20,10 @@ async function getKeyword() {
     fetch(api_url)
     .then(response=>response.json()).then(data=>displayOnWeb(data, inputKeyword))
 }
+
+
+document.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        getKeyword();
+    }
+});
