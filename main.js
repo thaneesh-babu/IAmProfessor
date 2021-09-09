@@ -1,6 +1,25 @@
-let api_url = "https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&site=stackoverflow"
 let api_url_unanswered = "https://api.stackexchange.com/2.3/questions/no-answers?order=desc&sort=activity&site=stackoverflow"
-//change equal of site, set as var
+
+//create array of all sites
+let api_getSites = "https://api.stackexchange.com/2.3/sites"
+let apiSitesArray = []
+let siteLength = 0
+
+function getAllSites(data){
+    for (let i = 0; i < data.items.length; i++){
+        apiSitesArray.push(JSON.stringify(data.items[i].api_site_parameter))
+    }
+    return apiSitesArray
+}
+
+fetch(api_getSites)
+  .then(response => response.json())
+  .then(data=>getAllSites(data))
+
+
+
+
+
 let resultsArr = []
 
 class resultsFromQuery {
@@ -49,8 +68,6 @@ function displayOnWeb(data, keyword) {
         document.write('No Results')
     }
 }
-
-
 
 async function getKeyword() {
     let inputKeyword = document.getElementById("searchbar").value
