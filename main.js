@@ -15,13 +15,8 @@ function displayOnWeb(data, keyword) {
     }
 }
 
-function getKeywordFromInput() {
-
+async function getKeyword() {
     let inputKeyword = document.getElementById("searchbar").value
-
-    fetch(api_url) 
-    .then(response=>response.json())
-
-    .then(data=>displayOnWeb(data, inputKeyword))
-
+    fetch(api_url)
+    .then(response=>response.json()).then(data=>displayOnWeb(data, inputKeyword))
 }
