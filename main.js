@@ -41,7 +41,7 @@ class resultsFromQuery {
         this._index = index
     }
     setQuestion(q){
-        this._questionName = 1
+        this._questionName = q
     }
     setLink(l){
         this._linkString = l
