@@ -68,7 +68,7 @@ class resultsFromQuery {
         this._views = v
     }
     setUpvotes(u){
-        this._upvotes
+        this._upvotes = u
     }
     setDate(d){
         let d1 = new Date(d)
@@ -91,7 +91,6 @@ function setupTemp(dataItem, i, site) {
     temp.setViews(dataItem.view_count)
     temp.setUpvotes(dataItem.score)
     temp.setDate(dataItem.creation_date)
-    console.log(temp)
     return temp
 }
 
@@ -99,9 +98,12 @@ function displayOnWeb(data, keyword, site) {
     var length = Object.keys(data.items).length;
     for (let i = 0; i < length; i++) {
         if (JSON.stringify(data.items[i].title).includes(keyword)) {
-            temp = setupTemp(JSON.stringify(data.items[i]), i, site)
+            temp = setupTemp(data.items[i], i, site)
             resultsArr.push(temp)
-    
+            document.write(JSON.stringify(data.items[i].title))
+            document.write("<br>")
+            document.write(temp.getLink())
+            document.write("<br>")
         }
     }
 }
@@ -110,14 +112,12 @@ async function getKeyword() {
     let inputKeyword = document.getElementById("searchbar").value
     for (let i = 0; i < apiSitesArray.length; i++){
         fetch(api_url_unanswered + apiSitesArray[i])
-        .then(response=>response.json())
-        .then(data=>displayOnWeb(data, inputKeyword, apiSitesArray[i]))
+    .then(response=>response.json())
+    .then(data=>displayOnWeb(data, inputKeyword, apiSitesArray[i]))  
     }
-    
 }
 
 //start of code ---------------------------------------
-
 fetch(api_getSites)
   .then(response => response.json())
   .then(data=>getAllSites(data))
