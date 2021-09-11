@@ -1,28 +1,79 @@
+* {
+    font-family: 'Lato', Arial, Helvetica, sans-serif;
+    font-size: 62.5%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: 0.23s ease-in-out all;
+}
+
+body {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 50vh;
+    padding: 10em;
+}
+
+h1 {
+    flex: 1;
+    font-size: 15em;
+    font-weight: 900;
+}
+
+.inputs {
+    flex: 2;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.inputs * {
+    font-size: 6em;
+    margin-left: 1em;
+    border-radius: 0.5em;
+}
+
 #searchbar {
-    margin-left: 25%;
-    margin-top: 10%;
-    padding: 15px;
-    border-radius: 10px;
+    /* margin-left: 25%;
+    margin-top: 10%; */
+    padding: 0.8em;
+    border-color: gray;
+    border-width: 0.07em;
+}
+
+#searchbar:focus {
+    border-radius: 1.2em;
+    border-color: black;
+    border-width: 0.13em;
 }
 
 #button {
     background-color: #1DB954;
-    padding: 15px 32px;
+    padding: 0.8em 0.8em;
     text-align: center;
-    border-radius: 10px;
+}
 
+#button:hover {
+    border-radius: 1.2em;
+    background-color: white;
+    color: rgb(0, 90, 8);
+    border-width: 0.13em;
 }
 
 input[type=text] {
     width: 50%;
 }
 
+/* https://stackoverflow.com/questions/3397113/how-to-remove-focus-border-outline-around-text-input-boxes-chrome */
+input:focus {
+    outline: none;
+}
+
 #list{
   font-size:  1.5em;
   margin-left: 90px;
- }
-
- h1 {
-     text-align: center;
-     font-family: Arial, Helvetica, sans-serif;
  }

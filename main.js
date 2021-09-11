@@ -101,6 +101,7 @@ function displayOnWeb(data, keyword, site) {
         if (JSON.stringify(data.items[i].title).includes(keyword)) {
             temp = setupTemp(JSON.stringify(data.items[i]), i, site)
             resultsArr.push(temp)
+    
         }
     }
 }
