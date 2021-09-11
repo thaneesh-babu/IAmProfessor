@@ -87,10 +87,11 @@ function setupTemp(dataItem, i, site) {
     temp.setLink(dataItem.link)
     temp.setQuestion(dataItem.title)
     temp.setSite(site)
-    temp.setAskerName(dataItem.owner.display_name)
+    //temp.setAskerName(dataItem.owner.display_name)
     temp.setViews(dataItem.view_count)
     temp.setUpvotes(dataItem.score)
     temp.setDate(dataItem.creation_date)
+    console.log(temp)
     return temp
 }
 
@@ -98,12 +99,11 @@ function displayOnWeb(data, keyword, site) {
     var length = Object.keys(data.items).length;
     for (let i = 0; i < length; i++) {
         if (JSON.stringify(data.items[i].title).includes(keyword)) {
-            temp = setupTemp(data.items[i], i, site)
-            resultsArr.push(temp)
-            document.write(JSON.stringify(data.items[i].title))
-            document.write("<br>")
-            document.write(temp.getLink())
-            document.write("<br>")
+            temp = setupTemp(JSON.stringify(data.items[i]), i, site)
+            resultsArr.push(temp);
+            document.write(JSON.stringify(data.items[i].title));
+            document.write("<br>");
+    
         }
     }
 }
@@ -112,12 +112,14 @@ async function getKeyword() {
     let inputKeyword = document.getElementById("searchbar").value
     for (let i = 0; i < apiSitesArray.length; i++){
         fetch(api_url_unanswered + apiSitesArray[i])
-    .then(response=>response.json())
-    .then(data=>displayOnWeb(data, inputKeyword, apiSitesArray[i]))  
+        .then(response=>response.json())
+        .then(data=>displayOnWeb(data, inputKeyword, apiSitesArray[i]))
     }
+    
 }
 
 //start of code ---------------------------------------
+
 fetch(api_getSites)
   .then(response => response.json())
   .then(data=>getAllSites(data))
