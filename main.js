@@ -72,8 +72,9 @@ class resultsFromQuery {
     }
     setDate(d){
         let d1 = new Date(d)
-        d1 = stringify(d1)
-        this._date = d1
+        d1 = d1.toString()
+        let d2 = d1.split(" ", 4).join(" ")
+        this._date = d2
     }
 }
 
