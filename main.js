@@ -110,7 +110,7 @@ async function getKeyword() {
     for (let i = 0; i < apiSitesArray.length; i++){
         fetch(api_url_unanswered + apiSitesArray[i])
         .then(response=>response.json())
-        .then(data=>displayOnWeb(data, inputKeyword), apiSitesArray[i])
+        .then(data=>displayOnWeb(data, inputKeyword, apiSitesArray[i]))
     }
     
 }
