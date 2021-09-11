@@ -1,4 +1,4 @@
-let api_url_unanswered = "https://api.stackexchange.com/2.3/questions/no-answers?order=desc&sort=activity&site=stackoverflow"
+let api_url_unanswered = "https://api.stackexchange.com/2.3/questions/no-answers?order=desc&sort=activity&site="
 
 //create array of all sites
 let api_getSites = "https://api.stackexchange.com/2.3/sites"
@@ -9,24 +9,21 @@ function getAllSites(data){
     for (let i = 0; i < data.items.length; i++){
         apiSitesArray.push(JSON.stringify(data.items[i].api_site_parameter))
     }
-    return apiSitesArray
 }
 
-fetch(api_getSites)
-  .then(response => response.json())
-  .then(data=>getAllSites(data))
-
-
-
-
-
+//results class and array to store all instances 
 let resultsArr = []
 
 class resultsFromQuery {
-    constructor(i, q, l){
+    constructor(i, q, l, s, an, v, u, d){
         this._index = i
         this._questionName = q
         this._linkString = l
+        this._site = s
+        this._askerName = an
+        this._views = v
+        this._upvotes = u
+        this._date = d
     }
     getIndex(){
         return this._index
@@ -37,6 +34,21 @@ class resultsFromQuery {
     getLink(){
         return this._linkString
     }
+    getSite(){
+        return this._site
+    }
+    getAskerName(){
+        return this._askerName
+    }
+    getViews(){
+        return this._views
+    }
+    getUpvotes(){
+        return this._upvotes
+    }
+    getDate(){
+        return this._date
+    }
     setIndex(index){
         this._index = index
     }
@@ -46,30 +58,64 @@ class resultsFromQuery {
     setLink(l){
         this._linkString = l
     }
+    setSite(s){
+        this._site = s
+    }
+    setAskerName(an){
+        this._askerName = an
+    }
+    setViews(v){
+        this._views = v
+    }
+    setUpvotes(u){
+        this._upvotes
+    }
+    setDate(d){
+        let d1 = new Date(d)
+        d1 = stringify(d1)
+        this._date = d1
+    }
 }
 
-let temp = new resultsFromQuery(0, "", "")
+//puts search result into a class and pushes it into an array
 
-function displayOnWeb(data, keyword) {
+let temp = new resultsFromQuery(0, "", "", "", "", 0, 0, "")
+
+function setupTemp(dataItem, i, site) {
+    temp.setIndex(i)
+    temp.setLink(dataItem.link)
+    temp.setQuestion(dataItem.title)
+    temp.setSite(site)
+    temp.setAskerName(dataItem.owner.display_name)
+    temp.setViews(dataItem.view_count)
+    temp.setUpvotes(dataItem.score)
+    temp.setDate(dataItem.creation_date)
+    console.log(temp)
+    return temp
+}
+
+function displayOnWeb(data, keyword, site) {
     var length = Object.keys(data.items).length;
-    var flag = false;
     for (let i = 0; i < length; i++) {
         if (JSON.stringify(data.items[i].title).includes(keyword)) {
-            flag = true;
-            temp.setIndex(i)
-            temp.setLink(JSON.stringify(data.items[i].link))
-            temp.setQuestion(JSON.stringify(data.items[i].title))
+            temp = setupTemp(JSON.stringify(data.items[i]), i, site)
             resultsArr.push(temp)
-            document.write(JSON.stringify(data.items[i].title) + " - " + JSON.stringify(data.items[i].link));
-            document.write("<br>");
         }
-    }
-    if (flag == false) {
-        document.write('No Results')
     }
 }
 
 async function getKeyword() {
     let inputKeyword = document.getElementById("searchbar").value
-    fetch(api_url_unanswered).then(response=>response.json()).then(data=>displayOnWeb(data, inputKeyword))
+    for (let i = 0; i < apiSitesArray.length; i++){
+        fetch(api_url_unanswered + apiSitesArray[i])
+        .then(response=>response.json())
+        .then(data=>displayOnWeb(data, inputKeyword), apiSitesArray[i])
+    }
+    
 }
+
+//start of code ---------------------------------------
+
+fetch(api_getSites)
+  .then(response => response.json())
+  .then(data=>getAllSites(data))
