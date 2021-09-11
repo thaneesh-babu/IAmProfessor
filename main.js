@@ -99,11 +99,10 @@ function displayOnWeb(data, keyword, site) {
     var length = Object.keys(data.items).length;
     for (let i = 0; i < length; i++) {
         if (JSON.stringify(data.items[i].title).includes(keyword)) {
-            temp = setupTemp(JSON.stringify(data.items[i]), i, site)
+            temp = setupTemp(data.items[i], i, site)
             resultsArr.push(temp);
             document.write(JSON.stringify(data.items[i].title));
             document.write("<br>");
-    
         }
     }
 }
