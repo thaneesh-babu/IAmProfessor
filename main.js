@@ -68,7 +68,7 @@ class resultsFromQuery {
         this._views = v
     }
     setUpvotes(u){
-        this._upvotes
+        this._upvotes = u
     }
     setDate(d){
         let d1 = new Date(d)
@@ -87,7 +87,7 @@ function setupTemp(dataItem, i, site) {
     temp.setLink(dataItem.link)
     temp.setQuestion(dataItem.title)
     temp.setSite(site)
-    temp.setAskerName(dataItem.owner.display_name)
+    //temp.setAskerName(dataItem.owner.display_name)
     temp.setViews(dataItem.view_count)
     temp.setUpvotes(dataItem.score)
     temp.setDate(dataItem.creation_date)
@@ -101,17 +101,16 @@ function displayOnWeb(data, keyword, site) {
         if (JSON.stringify(data.items[i].title).includes(keyword)) {
             temp = setupTemp(JSON.stringify(data.items[i]), i, site)
             resultsArr.push(temp)
+            console.log(temp.getQuestion())
         }
     }
 }
 
 async function getKeyword() {
     let inputKeyword = document.getElementById("searchbar").value
-    for (let i = 0; i < apiSitesArray.length; i++){
-        fetch(api_url_unanswered + apiSitesArray[i])
-        .then(response=>response.json())
-        .then(data=>displayOnWeb(data, inputKeyword, apiSitesArray[i]))
-    }
+    fetch(api_url_unanswered + apiSitesArray[0])
+    .then(response=>response.json())
+    .then(data=>displayOnWeb(data, inputKeyword, apiSitesArray[0]))
     
 }
 
