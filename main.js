@@ -7,7 +7,7 @@ let siteLength = 0
 
 function getAllSites(data){
     for (let i = 0; i < data.items.length; i++){
-        apiSitesArray.push(JSON.stringify(data.items[i].api_site_parameter))
+        apiSitesArray.push(JSON.stringify(data.items[i].api_site_parameter).replace(/["]+/g, ''))
     }
 }
 
