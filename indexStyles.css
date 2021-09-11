@@ -7,6 +7,7 @@
     transition: 0.23s ease-in-out all;
 }
 
+
 body {
     display: flex;
     flex-flow: column nowrap;
@@ -18,14 +19,16 @@ body {
 
 h1 {
     flex: 1;
-    font-size: 15em;
+    font-size: 14em;
     font-weight: 900;
+    max-width: 95vh;
+    text-align: center;
 }
 
 .inputs {
     flex: 2;
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -36,6 +39,8 @@ h1 {
     margin-left: 1em;
     border-radius: 0.5em;
 }
+
+
 
 #searchbar {
     /* margin-left: 25%;
@@ -74,6 +79,25 @@ input:focus {
 }
 
 #list{
-  font-size:  1.5em;
-  margin-left: 90px;
- }
+    font-size:  1.5em;
+    margin-left: 90px;
+}
+
+@media screen and (max-width: 450px) {
+    * {
+        font-size: 55%;
+    }
+    body {
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+    .inputs * {
+        /* font-size: 15em; */
+    }
+}
+
+@media screen and (max-width: 350px) {
+    * {
+        font-size: 52%;
+    }
+}
