@@ -1,4 +1,0 @@
-- use APIs from forum sites like stackexchange, quora etc
-- develop a web app that allows users to search for unanswered questions by typing in keywords and using filter options 
-  (ex: keywords, answer count, view count, date of question aka relevance) 
-- the more questions they answer, the more internet points they achieve -- last concern; unsure how incentivizing this would be
