@@ -1,14 +1,18 @@
 * {
     font-family: 'Lato', Arial, Helvetica, sans-serif;
-    font-size: 62.5%;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     transition: 0.23s ease-in-out all;
 }
 
-
 body {
+    margin: 0;
+    padding: 0;
+    font-size: 0.3em;
+}
+
+header {
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-evenly;
@@ -83,13 +87,62 @@ input:focus {
     margin-left: 90px;
 }
 
+section {
+    font-size: 5em;
+}
+.result {
+    width: 75%;
+    margin: auto;
+    padding: 1em;
+    padding-left: 2em;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    border-left: solid 3px black; 
+}
+.result ul {
+    display: flex;
+    flex-flow: row wrap;
+}
+.result li {
+    list-style: none;
+    margin: 0.8em;
+    border: 1px solid green;
+    border-radius: 0.7em;
+    padding: 0.5em;
+}
+
+@media screen and (max-width: 800px) {
+    body {
+        font-size: 0.2em;
+    }
+    h1 {
+        font-size: 20em;
+    }
+}
+
 @media screen and (max-width: 450px) {
     * {
         font-size: 55%;
     }
     body {
+        font-size: 1em;
+    }
+    h1 {
+        font-size: 12em;
+    }
+    header {
         padding-left: 2em;
         padding-right: 2em;
+    }
+    section {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 5.5em;
+        margin-bottom: 0.5em;
+    }
+    li {
+        font-size: 3em;
     }
     .inputs * {
         /* font-size: 15em; */
@@ -99,5 +152,8 @@ input:focus {
 @media screen and (max-width: 350px) {
     * {
         font-size: 52%;
+    }
+    body {
+        font-size: 0.85em;
     }
 }

@@ -97,10 +97,12 @@ function setupTemp(dataItem, i, site) {
 
 function displayOnWeb(data, keyword, site) {
     var length = Object.keys(data.items).length;
+    console.log(data);
     for (let i = 0; i < length; i++) {
         if (JSON.stringify(data.items[i].title).includes(keyword)) {
             temp = setupTemp(data.items[i], i, site)
             resultsArr.push(temp);
+            // write results to page
             document.write(JSON.stringify(data.items[i].title));
             document.write("<br>");
         }
