@@ -91,22 +91,37 @@ function setupTemp(dataItem, i, site) {
     temp.setViews(dataItem.view_count)
     temp.setUpvotes(dataItem.score)
     temp.setDate(dataItem.creation_date)
-    console.log(temp)
+    // console.log(temp)
     return temp
 }
 
 function displayOnWeb(data, keyword, site) {
-    var length = Object.keys(data.items).length;
-    console.log(data);
-    for (let i = 0; i < length; i++) {
-        if (JSON.stringify(data.items[i].title).includes(keyword)) {
-            temp = setupTemp(data.items[i], i, site)
-            resultsArr.push(temp);
-            // write results to page
-            document.write(JSON.stringify(data.items[i].title));
-            document.write("<br>");
-        }
-    }
+    // var length = Object.keys(data.items).length;
+    // console.log(data);
+    // for (let i = 0; i < length; i++) {
+    //     if (JSON.stringify(data.items[i].title).includes(keyword)) {
+    //         temp = setupTemp(data.items[i], i, site)
+    //         resultsArr.push(temp);
+    //         // write results to page
+    //         document.write(JSON.stringify(data.items[i].title));
+    //         document.write("<br>");
+    //     }
+    // }
+    let root = document.getElementById("root");
+    resultsArr.forEach(result =>  {
+        let r = document.createElement("div");
+        r.setAttribute("class", "result");
+        r.innerHTML = `<a href="${result._linkString}" class="link">
+        <h2>${result._questionName}</h2>
+        </a>
+        <ul class="details">
+            <li class="upvotes">Votes: ${result._upvotes}/li>
+            <li class="date">${result._date}</li>
+            <li class="site">${result._site}</li>
+            <li class="views">${result._views} views</li>
+        </ul>`;
+        root.appendChild(r);
+    });
 }
 
 async function getKeyword() {
